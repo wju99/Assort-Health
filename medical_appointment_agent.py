@@ -12,6 +12,8 @@ class MedicalAppointmentAgent(ChatGPTAgent):
         self.conversation_state = "greeting"
 
     async def respond(self, human_input: str, conversation_id: str, is_interrupt: bool = False) -> str:
+        print(f"Agent responding. Current state: {self.conversation_state}")
+        print(f"Human input: {human_input}")
         if self.conversation_state == "greeting":
             self.conversation_state = "name_dob"
             return "May I have your name and date of birth, please?"
@@ -57,3 +59,6 @@ class MedicalAppointmentAgent(ChatGPTAgent):
 
         else:
             return "I'm sorry, I didn't understand that. Could you please repeat?"
+        
+        print(f"Agent response: {response}")
+        return response

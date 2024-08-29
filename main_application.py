@@ -33,7 +33,6 @@ settings = Settings()
 async def main():
     microphone_input, speaker_output = create_streaming_microphone_input_and_speaker_output(
         use_default_devices=False,
-        use_blocking_speaker_output=True,
     )
 
     conversation = StreamingConversation(
@@ -65,7 +64,11 @@ async def main():
 
     while conversation.is_active():
         chunk = await microphone_input.get_audio()
+        print("Received audio chunk")
         conversation.receive_audio(chunk)
+        print("Processed audio chunk")
+
+    print("Conversation ended")
 
 if __name__ == "__main__":
     asyncio.run(main())
